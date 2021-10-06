@@ -1,16 +1,27 @@
+body{
+    background-color: #f4949c;
+    display: flex;
+    justify-content: center;
+}
 .grid{
     display: flex;
     flex-wrap:wrap;
-    width: 400px;
-    height: 400px;
-    background-color: blue;
+    width: 460px;
+    height: 460px;
+    margin-top: 20px;
 }
 
 .grid div{
     width: 100px;
     height: 100px;
-    background-color: yellow;
+    background-color: #ffd0a4;
+    border: 7px solid #7c9aac;
+    border-radius: 3px;
     font-size: 60px;
     text-align: center;
     font-weight: bold;
+    line-height: 1.6;
 }
+
+
+
