@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
         squares.push(square)
       }
       generate()
+      generate()
     }
     createBoard()
 
@@ -36,11 +37,70 @@ document.addEventListener('DOMContentLoaded', () =>  {
           let totalThree = squares[i+2].innerHTML
           let totalFour = squares[i+3].innerHTML
           let row = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
-          console.log(row)
+
+          let filterRow = row.filter(num => num)
+          let missing = 4 - filterRow.length
+          let zeroes = Array(missing).fill(0)
+          let newRow = zeroes.concat(filterRow)
+
+
+          squares[i].innerHTML = newRow[0]
+          squares[i+1].innerHTML = newRow[1]
+          squares[i+2].innerHTML = newRow[2]
+          squares[i+3].innerHTML = newRow[3]
         }
       }
     }
 
-    swipeRight();
+
+
+    function swipeLeft(){
+      for(let i=0; i < 16; i++){
+        if(i % 4 === 0){
+          let totalOne = squares[i].innerHTML
+          let totalTwo = squares[i+1].innerHTML
+          let totalThree = squares[i+2].innerHTML
+          let totalFour = squares[i+3].innerHTML
+          let row = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
+
+          let filterRow = row.filter(num => num)
+          let missing = 4 - filterRow.length
+          let zeroes = Array(missing).fill(0)
+          let newRow = filterRow.concat(zeroes)
+
+
+          squares[i].innerHTML = newRow[0]
+          squares[i+1].innerHTML = newRow[1]
+          squares[i+2].innerHTML = newRow[2]
+          squares[i+3].innerHTML = newRow[3]
+        }
+      }
+    }
+
+    function combineRow(){
+      for (let i = 0; i < 15; i++){
+        if(squares[i].innerHTML === squares[i+1].innerHTML){
+          let combineTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+1].innerHTML)
+          squares[i].innerHTML = combineTotal
+          squares[i+1].innerHTML = 0
+        }
+      }
+    }
+
+    //assign control
+    function control(e){
+      if(e.keyCode === 39){
+          keyRight()
+      }
+    }
+
+    document.addEventListener('keyup', control)
+
+    function keyRight(){
+      swipeRight()
+      combineRow()
+      swipeRight()
+      generate()
+    }
 
 })
