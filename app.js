@@ -53,6 +53,46 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
 
 
+    function swipeDown(){
+      for(i = 0; i < 4; i++){
+        let totalOne = squares[i].innerHTML
+          let totalTwo = squares[i + width].innerHTML
+          let totalThree = squares[i+ (width * 2)].innerHTML
+          let totalFour = squares[i+ (width * 3)].innerHTML
+          let column = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
+
+          let filterColumn = column.filter(num => num)
+          let missing = 4 - filterColumn.length
+          let zeroes = Array(missing).fill(0)
+          let newColumn = zeroes.concat(filterColumn)
+
+          squares[i].innerHTML = newColumn[0]
+          squares[i + width].innerHTML = newColumn[1]
+          squares[i+ (width * 2)].innerHTML = newColumn[2]
+          squares[i+ (width * 3)].innerHTML = newColumn[3]
+      }
+    }
+
+
+    function swipeUp(){
+      for(i = 0; i < 4; i++){
+        let totalOne = squares[i].innerHTML
+          let totalTwo = squares[i + width].innerHTML
+          let totalThree = squares[i+ (width * 2)].innerHTML
+          let totalFour = squares[i+ (width * 3)].innerHTML
+          let column = [parseInt(totalOne), parseInt(totalTwo), parseInt(totalThree), parseInt(totalFour)]
+
+          let filterColumn = column.filter(num => num)
+          let missing = 4 - filterColumn.length
+          let zeroes = Array(missing).fill(0)
+          let newColumn = filterColumn.concat(zeroes)
+
+          squares[i].innerHTML = newColumn[0]
+          squares[i + width].innerHTML = newColumn[1]
+          squares[i+ (width * 2)].innerHTML = newColumn[2]
+          squares[i+ (width * 3)].innerHTML = newColumn[3]
+      }
+    }
 
     function swipeLeft(){
       for(let i=0; i < 16; i++){
@@ -87,6 +127,16 @@ document.addEventListener('DOMContentLoaded', () =>  {
       }
     }
 
+    function combineColumn(){
+      for (let i = 0; i < 12; i++){
+        if(squares[i].innerHTML === squares[i+width].innerHTML){
+          let combineTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+width].innerHTML)
+          squares[i].innerHTML = combineTotal
+          squares[i+width].innerHTML = 0
+        }
+      }
+    }
+
     //assign control
     function control(e){
       if(e.keyCode === 39){
@@ -94,6 +144,12 @@ document.addEventListener('DOMContentLoaded', () =>  {
       }
       else if (e.keyCode === 37){
         keyLeft()
+      }
+      else if (e.keyCode == 38){
+        keyUp()
+      }
+      else if (e.keyCode == 40){
+        keyDown()
       }
     }
 
@@ -110,6 +166,20 @@ document.addEventListener('DOMContentLoaded', () =>  {
       swipeLeft()
       combineRow()
       swipeLeft()
+      generate()
+    }
+
+    function keyDown(){
+      swipeDown()
+      combineColumn()
+      swipeDown()
+      generate()
+    }
+
+    function keyUp(){
+      swipeUp()
+      combineColumn()
+      swipeUp()
       generate()
     }
 })
