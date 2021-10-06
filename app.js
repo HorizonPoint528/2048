@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
       let randomNumber = Math.floor(Math.random() * squares.length);
       if(squares[randomNumber].innerHTML == 0){
         squares[randomNumber].innerHTML = 2;
+        defeat()
       }
       else{
         generate()
@@ -123,8 +124,11 @@ document.addEventListener('DOMContentLoaded', () =>  {
           let combineTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+1].innerHTML)
           squares[i].innerHTML = combineTotal
           squares[i+1].innerHTML = 0
+          score += combineTotal
+          scoreDisplay.innerHTML = score
         }
       }
+      victory()
     }
 
     function combineColumn(){
@@ -133,8 +137,11 @@ document.addEventListener('DOMContentLoaded', () =>  {
           let combineTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+width].innerHTML)
           squares[i].innerHTML = combineTotal
           squares[i+width].innerHTML = 0
+          score += combineTotal
+          scoreDisplay.innerHTML = score
         }
       }
+      victory()
     }
 
     //assign control
@@ -181,5 +188,27 @@ document.addEventListener('DOMContentLoaded', () =>  {
       combineColumn()
       swipeUp()
       generate()
+    }
+
+    function victory(){ // check if 2048 has been acheived 
+      for (let i = 0; i < squares.length; i++){ // iterate through each square
+        if(squares[i].innerHTML == 2048){ // check if a square = 2048
+          resultDisplay.innerHTML = "You Win!" // display "You Win!"
+          document.removeEventListener('keyup', control) // take control away
+        }
+      }
+    }
+
+    function defeat(){ // check if no possible moves are left
+      let zeroes = 0
+      for(let i = 0; i < squares.length; i++){ // iterate through each square
+        if(squares[i].innerHTML == 0){ // add 1 to the counter
+          zeroes++
+        }
+      }
+      if(zeroes == 0){ // if there are no zero
+        resultDisplay.innerHTML = "You Lose!" // Display "You Lose !"
+        document.removeEventListener('keyup', control) // take control away from player
+      }
     }
 })
