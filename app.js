@@ -92,6 +92,9 @@ document.addEventListener('DOMContentLoaded', () =>  {
       if(e.keyCode === 39){
           keyRight()
       }
+      else if (e.keyCode === 37){
+        keyLeft()
+      }
     }
 
     document.addEventListener('keyup', control)
@@ -102,5 +105,11 @@ document.addEventListener('DOMContentLoaded', () =>  {
       swipeRight()
       generate()
     }
-
+    
+    function keyLeft(){
+      swipeLeft()
+      combineRow()
+      swipeLeft()
+      generate()
+    }
 })
