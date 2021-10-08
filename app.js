@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     const gridDisplay = document.querySelector('.grid')
     const scoreDisplay = document.getElementById('score')
     const resultDisplay = document.getElementById('result')
+    const historyDisplay = document.getElementById('history')
     let squares = []
     const width = 4
     let score = 0
@@ -163,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     document.addEventListener('keyup', control)
 
     function keyRight(){
+      historyDisplay.innerHTML = "➡️"
       swipeRight()
       combineRow()
       swipeRight()
@@ -170,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
     
     function keyLeft(){
+      historyDisplay.innerHTML = "⬅️"
       swipeLeft()
       combineRow()
       swipeLeft()
@@ -177,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
 
     function keyDown(){
+      historyDisplay.innerHTML = "⬇️"
       swipeDown()
       combineColumn()
       swipeDown()
@@ -184,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
 
     function keyUp(){
+      historyDisplay.innerHTML = "⬆️"
       swipeUp()
       combineColumn()
       swipeUp()
