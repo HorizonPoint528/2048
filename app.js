@@ -159,6 +159,10 @@ document.addEventListener('DOMContentLoaded', () =>  {
       else if (e.keyCode == 40){
         keyDown()
       }
+      else if (e.keyCode == 32){
+        score = 0;
+        scoreDisplay.innerHTML = score
+      }
     }
 
     document.addEventListener('keyup', control)
@@ -216,4 +220,5 @@ document.addEventListener('DOMContentLoaded', () =>  {
         document.removeEventListener('keyup', control) // take control away from player
       }
     }
+
 })
